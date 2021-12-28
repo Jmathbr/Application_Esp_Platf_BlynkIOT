@@ -56,18 +56,9 @@ void data(){
   
   Serial.println("User: " + Wifi_SSID);
   Serial.println("Password: " + Wifi_PASS);
-  
-  /*
-  String message = "POST form was:\n";
-    for (uint8_t i = 0; i < server.args(); i++) {
-      message += server.argName(i) + ": " + server.arg(i) + "\n";
-    }
-    server.send(200, "text/submit", message);
-    Serial.println(message);
-    */
 }
+
 void setup_acess_point(){
-  Serial.begin(115200);
   Serial.println();
   Serial.print("Configuring access point...");
   WiFi.softAP(ssid);
@@ -81,6 +72,7 @@ void setup_acess_point(){
 }
 //===============================================
 void setup(){
+  Serial.begin(115200);
   setup_acess_point();
 }
 //===============================================
