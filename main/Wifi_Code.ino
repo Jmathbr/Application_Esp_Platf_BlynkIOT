@@ -46,16 +46,13 @@ void handleRoot()
   server.send(200, "text/html", html);
 }
 void data(){
-  //Wifi_SSID = server.arg(0);
-  //Wifi_PASS = server.arg(1);
+  
   StaticJsonDocument<100> new_doc;
 
   new_doc["SSID"] = server.arg(0);
   new_doc["PASS"] = server.arg(1);
 
   String new_wifi;
-  
-  //Serial.println("NEW PASS: " + Wifi_PASS);
   
   serializeJson(new_doc, new_wifi);
   serializeJson(new_doc, Serial);
@@ -64,9 +61,6 @@ void data(){
   delay(3000);
   
   ESP.reset();
-  
-  //Serial.println("NEW SSID: " + Wifi_SSID);
-  //Serial.println("NEW PASS: " + Wifi_PASS);
 }    
 
 void setup_acess_point(){

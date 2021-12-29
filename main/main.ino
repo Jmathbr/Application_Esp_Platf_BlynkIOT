@@ -20,7 +20,6 @@ void post_fs(String msg);
 String get_fs();
 
 char auth[] = BLYNK_AUTH_TOKEN;
-String key_ssidG, key_passG;
 
 ESP8266WebServer server(80);
 
@@ -37,27 +36,21 @@ void setup() {
  
   String key_ssid = doc["SSID"];
   String key_pass = doc["PASS"];
-  
-  key_ssidG = key_ssid;
-  key_passG = key_pass;
-   
-}
 
-void loop() {
   Serial.println("Check Wifi Connectivity");
-  Serial.println("ssid -> "+key_ssidG);
-  Serial.println("PASS -> "+key_passG);
+  Serial.println("ssid -> "+key_ssid);
+  Serial.println("PASS -> "+key_pass);
   Serial.println("<Making Connection>");
   
-  if (wifi_check(key_ssidG,key_passG)== true){
+  if (wifi_check(key_ssid,key_pass)== true){
     Serial.println("Wifi stable");
     Serial.println("Active BLYNK");
 
-    char out_ssid[(key_ssidG.length()+1)]; 
-    key_ssidG.toCharArray(out_ssid,(key_ssidG.length()+1));
+    char out_ssid[(key_ssid.length()+1)]; 
+    key_ssid.toCharArray(out_ssid,(key_ssid.length()+1));
 
-    char out_pass[(key_passG.length()+1)]; 
-    key_passG.toCharArray(out_pass,(key_passG.length()+1));
+    char out_pass[(key_pass.length()+1)]; 
+    key_pass.toCharArray(out_pass,(key_pass.length()+1));
     
     Blynk.begin(auth, out_ssid, out_pass);
     while(true){
@@ -71,5 +64,8 @@ void loop() {
     while(true){
       server.handleClient();
       }
-  }
+  } 
+   
 }
+
+void loop() {}
