@@ -68,13 +68,16 @@ void setup_acess_point(){
 
 bool wifi_check(String ssid,String password){
   WiFi.begin(ssid, password);
-  int i = 0;
-  while(i <= 6){ 
-    delay(1000);
-    Serial.print(++i); Serial.print(' ');
-    if(WiFi.status()==true){
+  int count = 0;
+  while(WiFi.status()!= WL_CONNECTED && count<= 150){ 
+    delay(100);
+    Serial.print(".");
+    count = count + 1;
+    if(WiFi.status() == WL_CONNECTED){
+      Serial.println();     
       return true; 
     }
   }
+  Serial.println();
   return false;
 }
